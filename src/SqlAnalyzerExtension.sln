@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31613.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlAnalyzerExtension", "SqlAnalyzerExtension\SqlAnalyzerExtension.csproj", "{530625B3-88FD-41A0-9E4B-ED48D4E3C92B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlAnalyzer", "SqlAnalyzer\SqlAnalyzer.csproj", "{9BCB94DE-E0A2-4F1C-8A65-99876B9C0AD4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{530625B3-88FD-41A0-9E4B-ED48D4E3C92B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{530625B3-88FD-41A0-9E4B-ED48D4E3C92B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{530625B3-88FD-41A0-9E4B-ED48D4E3C92B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{530625B3-88FD-41A0-9E4B-ED48D4E3C92B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BCB94DE-E0A2-4F1C-8A65-99876B9C0AD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BCB94DE-E0A2-4F1C-8A65-99876B9C0AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BCB94DE-E0A2-4F1C-8A65-99876B9C0AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BCB94DE-E0A2-4F1C-8A65-99876B9C0AD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {75E4CC0F-CADA-41E6-961F-496EC5630BDE}
+	EndGlobalSection
+EndGlobal
