@@ -9,9 +9,9 @@ using SqlAnalyzer.DTO;
 
 namespace SqlAnalyzer.Analyzers
 {
-    public class CommentAnalyzer : IAnalyzer
+    class CommentAnalyzer : IAnalyzer
     {
-        private const string Message = "Remove commented code";
+        private const string Message = "Commented code should by removed";
         private readonly char[] multiComment = "\r\n\t /*".ToCharArray();
         private readonly char[] singleComment = "\r\n\t -".ToCharArray();
 
@@ -31,7 +31,7 @@ namespace SqlAnalyzer.Analyzers
                     visitor.Visit(result.Script);
                     if (visitor.Count > 0)
                     {
-                        yield return new DiagnosticMessage(new Span(comment.StartLocation.Offset, comment.Text.Length), Message, Severity.Warning);
+                        yield return DiagnosticMessage.Warning(new Span(comment.StartLocation.Offset, comment.Text.Length), Message);
                     }
                 }
             }

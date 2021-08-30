@@ -1,4 +1,5 @@
-﻿using Microsoft.SqlServer.Management.SqlParser.SqlCodeDom;
+﻿using Microsoft.SqlServer.Management.SqlParser.Parser;
+using Microsoft.SqlServer.Management.SqlParser.SqlCodeDom;
 using SqlAnalyzer.DTO;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace SqlAnalyzer.Analyzers
 {
     public class UnusedVariableAnalyzer : SqlCodeObjectRecursiveVisitor, IAnalyzer
     {
-        private const string Message = "Variable {0} is not used.";
+        internal const string Message = "Variable {0} is not used.";
         private readonly List<SqlVariableDeclaration> declared = new List<SqlVariableDeclaration>();
         private readonly List<string> used = new List<string>();
 
@@ -23,7 +24,7 @@ namespace SqlAnalyzer.Analyzers
             Visit(script);
             foreach (var variable in declared.Where(k => !used.Contains(k.Name.ToLower())))
             {
-                yield return new DiagnosticMessage(new Span(variable.StartLocation.Offset, variable.Length), string.Format(Message, variable.Name), Severity.Warning);
+                yield return DiagnosticMessage.Warning(new Span(variable.StartLocation.Offset, variable.Length), string.Format(Message, variable.Name));
             }
         }
 
@@ -55,6 +56,16 @@ namespace SqlAnalyzer.Analyzers
         {
             if (codeObject.Value is SqlScalarVariableRefExpression variable)
                 used.Add(variable.VariableName.ToLower());
+            base.Visit(codeObject);
+        }
+
+        public override void Visit(SqlInsertStatement codeObject)
+        {
+            if (codeObject.InsertSpecification.Source is SqlNullInsertSource)
+            {
+                var result = Parser.Parse(codeObject.InsertSpecification.Source.Sql);
+                Visit(result.Script);
+            }
             base.Visit(codeObject);
         }
     }

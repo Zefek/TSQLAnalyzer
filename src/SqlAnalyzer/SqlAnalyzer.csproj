@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analyzers\DeleteUpdateWithWhere.cs" />
+    <Compile Include="Analyzers\NullComparison.cs" />
+    <Compile Include="Analyzers\SelectColumns.cs" />
+    <Compile Include="Analyzers\SelfAssignVariable.cs" />
+    <Compile Include="Analyzers\TODOAnalyzer.cs" />
+    <Compile Include="Analyzers\VariableCountFetchCursorDeclare.cs" />
     <Compile Include="ISqlAnalyzerService.cs" />
     <Compile Include="SqlAnalyzerService.cs" />
     <Compile Include="Analyzers\CommentAnalyzer.cs" />

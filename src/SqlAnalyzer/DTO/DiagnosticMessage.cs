@@ -14,7 +14,7 @@ namespace SqlAnalyzer.DTO
     }
     public class DiagnosticMessage
     {
-        public DiagnosticMessage(Span span, string message, Severity severity)
+        internal DiagnosticMessage(Span span, string message, Severity severity)
         {
             Span = span;
             Message = message;
@@ -24,5 +24,7 @@ namespace SqlAnalyzer.DTO
         public Span Span { get; }
         public string Message { get; }
         public Severity Severity { get; }
+
+        public static DiagnosticMessage Warning(Span span, string message) => new DiagnosticMessage(span, message, Severity.Warning);
     }
 }

@@ -9,7 +9,7 @@ using SqlAnalyzer.DTO;
 
 namespace SqlAnalyzer.Analyzers
 {
-    public class SchemaAnalyzer : SqlCodeObjectRecursiveVisitor, IAnalyzer
+    class SchemaAnalyzer : SqlCodeObjectRecursiveVisitor, IAnalyzer
     {
         private const string Message = "Object should have schema name (dbo).";
 
@@ -21,7 +21,7 @@ namespace SqlAnalyzer.Analyzers
             Visit(script);
             foreach (var expression in identifiers)
             {
-                yield return new DiagnosticMessage(new Span(expression.StartLocation.Offset, expression.Length), Message, Severity.Warning);
+                yield return DiagnosticMessage.Warning(new Span(expression.StartLocation.Offset, expression.Length), Message);
             }
         }
 
