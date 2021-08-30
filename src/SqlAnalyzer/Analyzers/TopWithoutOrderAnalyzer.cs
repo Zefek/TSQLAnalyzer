@@ -11,7 +11,7 @@ namespace SqlAnalyzer.Analyzers
 {
     public class TopWithoutOrderAnalyzer : SqlCodeObjectRecursiveVisitor, IAnalyzer
     {
-        private const string Message = "TOP without ORDER BY";
+        internal const string Message = "Select with TOP should not be without ORDER BY";
 
         private readonly List<SqlTopSpecification> topWithoutOrder = new List<SqlTopSpecification>();
 
@@ -22,7 +22,7 @@ namespace SqlAnalyzer.Analyzers
             Visit(script);
             foreach (var top in topWithoutOrder)
             {
-                yield return new DiagnosticMessage(new Span(top.StartLocation.Offset, top.Length), Message, Severity.Warning);
+                yield return DiagnosticMessage.Warning(new Span(top.StartLocation.Offset, top.Length), Message);
             }
         }
 
@@ -30,6 +30,13 @@ namespace SqlAnalyzer.Analyzers
         {
             if (codeObject.Children.OfType<SqlSelectClause>().Any(k => k.Top != null) && codeObject.Parent is SqlSelectSpecification parent && parent.OrderByClause == null)
                 topWithoutOrder.Add(codeObject.Children.OfType<SqlSelectClause>().First().Top);
+            base.Visit(codeObject);
+        }
+
+        public override void Visit(SqlDeleteSpecification codeObject)
+        {
+            if (codeObject.TopSpecification != null && !codeObject.Children.OfType<SqlOrderByClause>().Any())
+                topWithoutOrder.Add(codeObject.TopSpecification);
             base.Visit(codeObject);
         }
     }

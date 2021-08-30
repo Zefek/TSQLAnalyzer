@@ -15,10 +15,16 @@ namespace SqlAnalyzer
 
         public SqlAnalyzerService()
         {
-            AddAnalyzer(new SchemaAnalyzer());
-            AddAnalyzer(new UnusedVariableAnalyzer());
-            AddAnalyzer(new TopWithoutOrderAnalyzer());
             AddAnalyzer(new CommentAnalyzer());
+            AddAnalyzer(new DeleteUpdateWithWhere());
+            AddAnalyzer(new NullComparison());
+            AddAnalyzer(new SelectColumns());
+            AddAnalyzer(new SelfAssignVariable());
+            AddAnalyzer(new SchemaAnalyzer());
+            AddAnalyzer(new TODOAnalyzer());
+            AddAnalyzer(new TopWithoutOrderAnalyzer());
+            AddAnalyzer(new UnusedVariableAnalyzer());
+            AddAnalyzer(new VariableCountFetchCursorDeclare());
         }
 
         public void AddAnalyzer(IAnalyzer analyzer)

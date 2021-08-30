@@ -3,3 +3,11 @@
 ################################################################################
 
 /.vs
+/src/.vs/SqlAnalyzerExtension/v16
+/src/packages
+/src/SqlAnalyzerTests/bin/Debug
+/src/SqlAnalyzerTests/obj
+/src/SqlAnalyzerExtension/bin/Debug
+/src/SqlAnalyzerExtension/obj
+/src/SqlAnalyzer/bin/Debug
+/src/SqlAnalyzer/obj
