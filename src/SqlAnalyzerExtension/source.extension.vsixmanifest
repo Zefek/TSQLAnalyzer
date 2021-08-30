@@ -1,13 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="VSIXProject3.00856ab0-b090-478a-8447-2c8bc454d0cc" Version="1.1.1" Language="en-US" Publisher="Petr B." />
+        <Identity Id="VSIXProject3.00856ab0-b090-478a-8447-2c8bc454d0cc" Version="2.0.0" Language="en-US" Publisher="Petr B." />
         <DisplayName>T-SQL Analyzer</DisplayName>
         <Description xml:space="preserve">T-SQL Analyzer to analyze T-SQL scripts and provides some information to refactoring.</Description>
         <Tags>T-SQL, Refactoring</Tags>
     </Metadata>
     <Installation>
-        <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[16.0,17.0)" />
+        <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[16.0,18.0)">
+            <ProductArchitecture>x86</ProductArchitecture>
+        </InstallationTarget>
+        <InstallationTarget Version="[16.0,18.0)" Id="Microsoft.VisualStudio.IntegratedShell">
+            <ProductArchitecture>x86</ProductArchitecture>
+        </InstallationTarget>
+        <InstallationTarget Version="[16.0,18.0)" Id="Microsoft.VisualStudio.Community">
+            <ProductArchitecture>x86</ProductArchitecture>
+        </InstallationTarget>
+        <InstallationTarget Version="[16.0,18.0)" Id="Microsoft.VisualStudio.Enterprise">
+            <ProductArchitecture>x86</ProductArchitecture>
+        </InstallationTarget>
     </Installation>
     <Dependencies>
         <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
