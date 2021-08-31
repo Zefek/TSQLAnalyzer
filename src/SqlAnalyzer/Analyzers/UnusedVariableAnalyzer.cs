@@ -22,10 +22,9 @@ namespace SqlAnalyzer.Analyzers
             declared.Clear();
             used.Clear();
             Visit(script);
-            foreach (var variable in declared.Where(k => !used.Contains(k.Name.ToLower())))
-            {
-                yield return DiagnosticMessage.Warning(new Span(variable.StartLocation.Offset, variable.Length), string.Format(Message, variable.Name));
-            }
+            return declared
+                .Where(k => !used.Contains(k.Name.ToLower()))
+                .Select(l => DiagnosticMessage.Warning(new Span(l.StartLocation.Offset, l.Length), string.Format(Message, l.Name)));
         }
 
         public override void Visit(SqlVariableDeclaration codeObject)
@@ -67,6 +66,12 @@ namespace SqlAnalyzer.Analyzers
                 Visit(result.Script);
             }
             base.Visit(codeObject);
+        }
+
+        public override void Visit(SqlStatement codeObject)
+        {
+            if (codeObject is SqlNullStatement statement && statement.Sql.ToLower().StartsWith("print"))
+                used.AddRange(statement.Tokens.Where(k => k.Id == (int)Tokens.TOKEN_VARIABLE).Select(k => k.Text.ToLower()).Distinct());
         }
     }
 }

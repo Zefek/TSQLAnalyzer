@@ -17,6 +17,7 @@ namespace SqlAnalyzer.Analyzers
         private readonly List<SqlCodeObject> fetchStatements = new List<SqlCodeObject>();
 
         private string currentCursor = string.Empty;
+        private bool cursorSelectDefined = false;
         public string Name => "Fetch variable count is same as cursor declare";
 
         public IEnumerable<DiagnosticMessage> Analyze(SqlScript script)
@@ -32,6 +33,7 @@ namespace SqlAnalyzer.Analyzers
             currentCursor = codeObject.Name.Value.ToLower();
             if (!cursorVariableCount.ContainsKey(currentCursor))
             {
+                cursorSelectDefined = false;
                 cursorVariableCount.Add(currentCursor, 0);
                 base.Visit(codeObject);
             }
@@ -39,8 +41,11 @@ namespace SqlAnalyzer.Analyzers
         }
         public override void Visit(SqlSelectClause codeObject)
         {
-            if (!string.IsNullOrEmpty(currentCursor))
+            if (!string.IsNullOrEmpty(currentCursor) && !cursorSelectDefined)
+            {
                 cursorVariableCount[currentCursor] = codeObject.SelectExpressions.Count;
+                cursorSelectDefined = true;
+            }
         }
         public override void Visit(SqlStatement codeObject)
         {
