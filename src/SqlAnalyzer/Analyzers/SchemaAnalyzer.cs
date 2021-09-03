@@ -9,9 +9,9 @@ using SqlAnalyzer.DTO;
 
 namespace SqlAnalyzer.Analyzers
 {
-    class SchemaAnalyzer : SqlCodeObjectRecursiveVisitor, IAnalyzer
+    internal class SchemaAnalyzer : SqlCodeObjectRecursiveVisitor, IAnalyzer
     {
-        private const string Message = "Object should have schema name (dbo).";
+        internal const string Message = "Object should have schema name (dbo).";
 
         private readonly List<SqlObjectIdentifier> identifiers = new List<SqlObjectIdentifier>();
         public string Name => "Schema analyzer";
@@ -27,7 +27,7 @@ namespace SqlAnalyzer.Analyzers
 
         public override void Visit(SqlTableRefExpression codeObject)
         {
-            if (string.IsNullOrEmpty(codeObject.ObjectIdentifier.SchemaName.Value))
+            if (string.IsNullOrEmpty(codeObject.ObjectIdentifier.SchemaName.Value) && !codeObject.ObjectIdentifier.ObjectName.Value.StartsWith("#"))
             {
                 if (!(codeObject.Parent is SqlUpdateSpecification) || (codeObject.Parent is SqlUpdateSpecification parent && parent.FromClause == null))
                     identifiers.Add(codeObject.ObjectIdentifier);

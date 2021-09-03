@@ -9,7 +9,7 @@ using SqlAnalyzer.DTO;
 
 namespace SqlAnalyzer.Analyzers
 {
-    class CommentAnalyzer : IAnalyzer
+    public class CommentAnalyzer : IAnalyzer
     {
         private const string Message = "Commented code should by removed";
         private readonly char[] multiComment = "\r\n\t /*".ToCharArray();
@@ -136,7 +136,12 @@ namespace SqlAnalyzer.Analyzers
         public override void Visit(SqlTryCatchStatement codeObject) { Count++; base.Visit(codeObject); }
         public override void Visit(SqlSetStatement codeObject) { Count++; base.Visit(codeObject); }
         public override void Visit(SqlSetAssignmentStatement codeObject) { Count++; base.Visit(codeObject); }
-        public override void Visit(SqlStatement codeObject) { Count++; base.Visit(codeObject); }
+        public override void Visit(SqlStatement codeObject) 
+        {
+            if (!codeObject.Tokens.All(k => k.Id == (int)Tokens.TOKEN_LABEL))
+                Count++;
+            base.Visit(codeObject); 
+        }
         public override void Visit(SqlSelectStatement codeObject) { Count++; base.Visit(codeObject); }
         public override void Visit(SqlReturnStatement codeObject) { Count++; base.Visit(codeObject); }
         public override void Visit(SqlRestoreTableStatement codeObject) { Count++; base.Visit(codeObject); }

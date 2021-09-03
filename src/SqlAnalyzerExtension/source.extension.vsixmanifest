@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
 	<Metadata>
-		<Identity Id="VSIXProject3.00856ab0-b090-478a-8447-2c8bc454d0cc" Version="2.19.0" Language="en-US" Publisher="Petr B." />
+		<Identity Id="VSIXProject3.00856ab0-b090-478a-8447-2c8bc454d0cc" Version="2.19.2" Language="en-US" Publisher="Petr B." />
 		<DisplayName>T-SQL Analyzer</DisplayName>
 		<Description xml:space="preserve">T-SQL Analyzer to analyze T-SQL scripts and provides some information to refactoring.</Description>
 		<Tags>T-SQL, Refactoring</Tags>

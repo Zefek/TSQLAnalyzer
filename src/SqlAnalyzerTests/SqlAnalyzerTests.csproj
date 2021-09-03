@@ -59,8 +59,10 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Analyzers\CommentAnalyzerTests.cs" />
     <Compile Include="Analyzers\DeleteUpdateWithWhereTests.cs" />
     <Compile Include="Analyzers\NullComparisonTests.cs" />
+    <Compile Include="Analyzers\SchemaAnalyzerTests.cs" />
     <Compile Include="Analyzers\SelectColumnsTests.cs" />
     <Compile Include="Analyzers\SelfAssignVariableTests.cs" />
     <Compile Include="Analyzers\TODOAnalyzerTests.cs" />
